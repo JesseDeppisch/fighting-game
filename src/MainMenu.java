@@ -19,27 +19,27 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class MainMenu extends BasicGameState{
 	
 	/**
-	 * The game state of the main menu for the game.
+	 * The main menu of the game
 	 * 
-	 * @author Jesse Deppisch
+	 * @author JesseDeppisch
 	 */
 	
-	// ID number of the state
+	// BasicGameState declarations
 	public static final int ID = 1;
-	// The game holding this state
 	private static StateBasedGame game;
-	// The font
+	
+	// Style declarations
 	private static TrueTypeFont largeFont;
 	private static TrueTypeFont smallFont;
 
-	// Initializes the state, and loads any resources needed
+	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
 		largeFont = new TrueTypeFont(new java.awt.Font("Verdana", Font.PLAIN, 20), false);
 		smallFont = new TrueTypeFont(new java.awt.Font("Verdana", Font.PLAIN, 12), false);
 	}
 
-	// Renders the game
+	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		container.getGraphics().setBackground(new Color(0.4f,0.6f,0.6f));
 		
@@ -59,30 +59,29 @@ public class MainMenu extends BasicGameState{
 		g.drawString("Play (2P Test)", 100, 300);
 		g.drawRect(95, 300, 100, 20);
 		
-		// Test later line directly below (for buttons)
-		QuadBasedLineStripRenderer buttonTest = new QuadBasedLineStripRenderer();
-		
-		
 		/** Only for testing purposes, remove later */
 		int xPos = Mouse.getX();
 		int yPos = 625 - Mouse.getY();
 		g.drawString("X: " + xPos + " Y: " + yPos, 20, 40);
 		
-		
-		
 	}
 
-	// Updates the state's logic (can be based on the amount of time that's passed)
+	@Override
 	public void update(GameContainer conmtainer, StateBasedGame game, int delta) throws SlickException {
 		//TODO - Not done so far - may not be needed
 	}
 
-	// Returns the ID of the BasicGameState
+	@Override
 	public int getID() {
 		return ID;
 	}
 	
-	// When a mouse button is pressed
+	/**
+	 * actionListener for the mouse
+	 * 
+	 * @param x x coordinate of the mouse press
+	 * @param y y coordinate of the mouse press
+	 */
 	public void mousePressed(int button, int x, int y) {
 		
 		// Looking to see if the person clicked in the "Options" rectangle

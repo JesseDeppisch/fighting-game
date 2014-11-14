@@ -15,31 +15,29 @@ public class Play extends BasicGameState{
 	 * A test of the game that has one player on the map, to demonstrate a static version of the game,
 	 * and also used to test movement concepts for the game.
 	 * 
-	 * @author Jesse Deppisch
+	 * @author JesseDeppisch
 	 */
 	
+	// StateBasedGame declarations
 	public static final int ID = 3;
 	private StateBasedGame game;
-	private TrueTypeFont largeFont;
-	private TrueTypeFont smallFont;
 	
-	private Image foreground;
-	private Image background;
-	private Image stickFigure;
+	// Map declarations
+	private static Image foreground;
+	private static Image background;
+	private static Image stickFigure;
 	
-	private float foregroundPosition; // X coordinate of the image, used for drawing
-	private float backgroundPosition;
-	private float playerPosition; // X coordinate of the stick figure
+	// Positioning declarations
+	private static float foregroundPosition; // X coordinate of the image, used for drawing
+	private static float backgroundPosition;
+	private static float playerPosition; // X coordinate of the stick figure
 	
-	private boolean leftMovement; // Used because there is no keyHeld method
-	private boolean rightMovement;
+	private static boolean leftMovement; // Used because there is no keyHeld method
+	private static boolean rightMovement;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
-		
-		largeFont = new TrueTypeFont(new java.awt.Font("Verdana", Font.PLAIN, 20), false);
-		smallFont = new TrueTypeFont(new java.awt.Font("Verdana", Font.PLAIN, 12), false);
 		
 		background = new Image("res/Clouds.png");
 		foreground = new Image("res/Game Background.png");
@@ -85,6 +83,12 @@ public class Play extends BasicGameState{
 		return ID;
 	}
 	
+	/**
+	 * actionListener for all key presses (part of game loop - doesn't need to be executed)
+	 * 
+	 * @param key value of key pressed
+	 * @param c value of key pressed 
+	 */
 	public void keyPressed(int key, char c) {
 		
 		if (key == 203) { // If the key pressed is the left arrow key
@@ -99,6 +103,12 @@ public class Play extends BasicGameState{
 		System.out.println("Char: " + c);
 	}
 	
+	/**
+	 * actionListener for all key releases (part of game loop - doesn't need to be executed)
+	 * 
+	 * @param key value of key released
+	 * @param c value of key released
+	 */
 	public void keyReleased(int key, char c) {
 		
 		if (key == 203) { // If the key released is the left arrow key

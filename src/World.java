@@ -7,14 +7,19 @@ public class World {
 	 * Note: this class does not hold what frame of reference the map is, this
 	 * is instead in the play game state.
 	 * 
-	 * @author Jesse Deppisch
+	 * @author JesseDeppisch
 	 */
 	
-	// TODO maybe have image position contained here
-	
+	// Image declarations
 	private Image foreground;
 	private Image background;
 	
+	/**
+	 * Constructor for a new world
+	 * 
+	 * @param background background image
+	 * @param foreground foreground image
+	 */
 	public World(Image background, Image foreground) {
 		this.foreground = foreground;
 		this.background = background;
