@@ -15,20 +15,18 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class OptionMenu extends BasicGameState {
 	
 	/**
-	 * A test for an options menu, which we will have in our game.
+	 * The options menu
 	 * 
-	 * @author Jesse Deppisch
+	 * @author JesseDeppisch
 	 */
 	
+	// BasicGameState declarations
 	public static final int ID = 2;
-	
 	private static StateBasedGame game;
+	
+	// Style declarations
 	private static TrueTypeFont largeFont;
 	private static TrueTypeFont smallFont;
-	
-	
-	
-	FireEmitter fireTest = new FireEmitter(200, 200);
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
@@ -69,17 +67,22 @@ public class OptionMenu extends BasicGameState {
 		
 	}
 
-	// Updates the state's logic (can be based on the amount of time that's passed) 
+	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		// TODO
 	}
 
-	// Returns the ID of the state
+	@Override
 	public int getID() {
 		return ID;
 	}
 	
-	// WHenever the mouse button is pressed
+	/**
+	 * actionListener for the mouse
+	 * 
+	 * @param x x coordinate of the mouse press
+	 * @param y y coordinate of the mouse press
+	 */
 	public void mousePressed(int button, int x, int y) {
 		if ((x > 95 && x < 225) && (y > 100 && y < 120)) {
 			game.enterState(MainMenu.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));

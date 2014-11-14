@@ -16,15 +16,19 @@ public class Driver extends StateBasedGame {
 	 * the game. This includes the main method, and handles states of the games.
 	 * Note that this is NOT the main menu!
 	 * 
-	 * @author Jesse Deppisch
+	 * @author JesseDeppisch
 	 */
 	
-	// Constructor handles the superclass' constructor, which controls the title name of the window.
+	/**
+	 * Constructor for the Driver
+	 */
 	public Driver() {
 		super("Fighting Game ");
 	}
 
-	// Main method
+	/**
+	 * Main method (execution of the game)
+	 */
 	public static void main(String[] args) {
 		/*
 		 * Attempts to create a new AppGameContainer with the size 1000 * 625
@@ -43,9 +47,12 @@ public class Driver extends StateBasedGame {
 		
 	}
 
-	// List of all the game states. Note that the first one on this list will be executed first,
-	// and thus the first state on this screen should ALWAYS be the splash screen.
+	/**
+	 * Load the states of the game
+	 */
 	public void initStatesList(GameContainer container) throws SlickException {
+		// The first state on this list will be executed first,
+		// and thus the first state in this method should ALWAYS be the splash screen.
 		addState(new SplashScreen());
 		addState(new MainMenu());
 		addState(new OptionMenu());
@@ -53,7 +60,15 @@ public class Driver extends StateBasedGame {
 		addState(new ActualPlay());
 	}
 
-	
+	/**
+	 * Render method
+	 * 
+	 * @param container GameContainer to render in
+	 * @param game Game to render
+	 * @param g Graphics object
+	 * 
+	 * @throws SlickException
+	 */
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		
 	}

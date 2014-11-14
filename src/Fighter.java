@@ -6,14 +6,17 @@ public class Fighter {
 	/**
 	 * This class holds attributes for the characters (fighters) in the game.
 	 * 
-	 * @author Jesse Deppisch
+	 * @author JesseDeppisch
 	 */
 	
+	// Graphics declarations
+	private Image characterImage;            // Image that should be drawn for the fighter
+	
+	// Positioning and movement declarations
 	private float yVelocity;                 // The velocity of the fighter
 	private Vector2f position;               // Vector (has an x and y float) for position of the fighter (using java coordinate system)
 	private AABB collisionBox;               // Collision box for the fighter 
 	
-	private Image characterImage;            // Image that should be drawn for the fighter
 	private boolean intentToMoveLeft;        // Boolean that sees if the player wants to move left
 	private boolean intentToMoveRight;       // Boolean that sees if the player wants to move right
 	private boolean leftMovementRestricted;  // Boolean that sees if the player is allowed to move left (due to collision boxes)
@@ -21,11 +24,20 @@ public class Fighter {
 	private boolean facingLeft;              // Boolean that checks if the player is facing left
 	private boolean facingRight;             // Boolean that checks if the player is facing right
 	
+	private String currentAction;            // Current action that is being performed by the fighter
+	private String lastAction;               // Last action performed by the fighter
+	
+	// Aspects (of the fighter) declarations
 	private float health;                    // Health of the fighter
 	private float rage;                      // Amount of rage of the fighter
-	private String currentAction;            // Current action that is being performed by the fighter
-	private String lastAction;
 	
+	/**
+	 * Construct a new fighter
+	 * 
+	 * @param characterImage Image of the fighter
+	 * @param x x coordinate to spawn at
+	 * @param y y coordinate to spawn at
+	 */
 	public Fighter(Image characterImage, float x, float y) {
 		this.characterImage = characterImage;
 		position = new Vector2f(x, y);
@@ -43,14 +55,25 @@ public class Fighter {
 		return position;
 	}
 	
+	
 	public void setPosition(Vector2f position) {
 		this.position = position;
 	}
 	
+	/**
+	 * Move the fighter left
+	 * 
+	 * @param speed speed of the movement
+	 */
 	public void moveLeft(float speed) {
 		position.set(position.getX() - speed, position.getY());
 	}
 	
+	/**
+	 * Move the fighter right
+	 * 
+	 * @param speed speed of the movement
+	 */
 	public void moveRight(float speed) {
 		position.set(position.getX() + speed, position.getY());
 	}
@@ -59,6 +82,12 @@ public class Fighter {
 		return characterImage;
 	}
 	
+	/**
+	 * Set the intent of the fighter to move
+	 * 
+	 * @param direction direction of intent
+	 * @param intent true if the fighter wants to move, false if not
+	 */
 	public void setIntent(String direction, boolean intent) {
 		if (direction.equals("left")) {
 			intentToMoveLeft = intent;
@@ -69,6 +98,12 @@ public class Fighter {
 		}
 	}
 	
+	/**
+	 * Get the movement intent of the fighter
+	 * 
+	 * @param direction direction of intent
+	 * @return true if the fighter wants to move, false if not
+	 */
 	public boolean getIntent(String direction) {
 		if (direction.equals("left")) {
 			return intentToMoveLeft;
@@ -81,6 +116,9 @@ public class Fighter {
 		
 	}
 	
+	/**
+	 * Update the collision box of the fighter
+	 */
 	public void updateAABB() {
 		getCollisionBox().pos.set(position.getX() + (characterImage.getWidth() / 2), position.getY() + (characterImage.getHeight() / 2)); 
 		// Note that pos is a Vector2f
@@ -95,6 +133,7 @@ public class Fighter {
 		this.collisionBox = collisionBox;
 	}
 
+	
 	public boolean isLeftMovementRestricted() {
 		return leftMovementRestricted;
 	}

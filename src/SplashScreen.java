@@ -10,22 +10,33 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 
 public class SplashScreen extends BasicGameState {
 	
+	/**
+	 * The splash screen of the game
+	 * 
+	 * @author JesseDeppisch
+	 */
+	// StateBasedGame declarations
 	public static final int ID = 0;
 	private static StateBasedGame game;
 	
+	// Splash screen image declaration
 	private static Image splashScreen;
 
+	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
 		splashScreen = new Image("res/splashscreen.png"); // placeholder until we name the game
 	}
-
+	
+	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.drawImage(splashScreen, 0, 0);
 	}
 
-	// Only meant to run once, since this is the splash screen
+	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
+		
+		// Only meant to run once, since this is the splash screen
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -35,6 +46,7 @@ public class SplashScreen extends BasicGameState {
 		game.enterState(MainMenu.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
 
+	@Override
 	public int getID() {
 		return 0;
 	}

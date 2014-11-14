@@ -1,6 +1,4 @@
-
 import java.awt.Font;
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -25,34 +23,41 @@ public class ActualPlay extends BasicGameState{
 	 * A test of the game that includes 2 players on the map, and unlike
 	 * the Play class, is built using objects.
 	 * 
-	 * @author Jesse
+	 * @author JesseDeppisch
 	 */
 	
-	private Animation idleAnimation;
-	private Animation animationToReturn;
-	
+	// BasicGameState declarations
 	public static final int ID = 4;          // Used to identify which game state this is
-	private static StateBasedGame game;      // the game that the game is running in (ignore, but this is necessary)
+	private static StateBasedGame game;      // the game that the game is running in 
 	
-	private Fighter player1;          // player 1
-	private Fighter player2;          // player 2
+	// Animation declarations
+	private static Animation idleAnimation;         // the animaion to be played when the fighter is doing nothing
+	private static Animation animationToReturn;     // animation to be returned (used by whichAnimation and lastAnimation
+
+	// Fighter (player) declarations
+	private static Fighter player1;          // player 1
+	private static Fighter player2;          // player 2
 	
-	private World world;              // the map
+	private static Image p1;                 // ONLY IN TESTING!! (player identifier)
+	private static Image p2;                 // ONLY IN TESTING!! (player identifier)
 	
-	private Image p1;                 // ONLY IN TESTING!! (player identifier)
-	private Image p2;                 // ONLY IN TESTING!! (player identifier)
+	// Map declarations
+	private static World world;              // the map
 	
-	private float foregroundPosition; // X coordinate of the foreground
-	private float backgroundPosition; // X coordinate of the background
+	// Positioning/movement declarations
+	private static float foregroundPosition; // X coordinate of the foreground
+	private static float backgroundPosition; // X coordinate of the background
 	 
-	private float fms;                       // fighter movement speed
-	private float fgms;               // foreground movement speed
-	// note that the foreground movement speed and the fighter movement speed MUST BE THE SAME, and thus are the same
-	private float bgms;               // background movement speed
+	private static float fms;                // fighter movement speed
+	private static float fgms;               // foreground movement speed
+	private static float bgms;               // background movement speed
+	//!!! note that the foreground movement speed and the fighter movement speed MUST BE THE SAME, and thus are the same
 	
-	// HUD Variables
+	private static float gravity;            // Acceleration due to gravity         
+	private static float jumpVelocity;       // Velocity a player gains when jumping (switch to be an attribute of fighter!)
 	
-	private String colorScheme;       // Color scheme to be used for the HUD
+	// HUD declarations
+	private static String colorScheme;       // Color scheme to be used for the HUD
 	
 	private static Color color1;             // Filler Color
 	private static Color color2;             // Outline Color
@@ -63,19 +68,14 @@ public class ActualPlay extends BasicGameState{
 	private static Polygon smallLeft;        // Small left polygon
 	private static Polygon smallRight;       // Small right polygon
 	
-
+	// Pause menu declarations
 	private boolean haveDefined;             // Has the pause Mask been defined yet
 	private boolean gamePaused;              // Is the game paused
 	
-	// TODO
-	
-	private float gravity;         
-	private float jumpVelocity;
-	
 
-	/**************************************************** 
-	 * Game Initialization Method - Load Resources Here *
-	 ****************************************************/
+	/** 
+	 * Game resources loaded here
+	 */
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
 		haveDefined = false;
@@ -157,10 +157,11 @@ public class ActualPlay extends BasicGameState{
 		
 		// TODO - Add rest of HUD
 	}
+	
 
-	/*******************************************
-	 * Rendering Method - All Graphics Go Here *
-	 *******************************************/
+	/**
+	 * Rendering Method - All graphics go here
+	 */
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		g.setAntiAlias(true);
 		
@@ -208,9 +209,9 @@ public class ActualPlay extends BasicGameState{
 	}
 	
 
-	/**************************************
-	 * Game Loop Method - Logic Goes Here *
-	 **************************************/
+	/**
+	 * Game Loop Method - Logic goes here
+	 */
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		
 		if (!gamePaused) {
@@ -264,18 +265,21 @@ public class ActualPlay extends BasicGameState{
 		}
 		
 	}
+	
 
-	/************************************
-	 * Returns the ID of the game state *
-	 ************************************/
+	/**
+	 * Returns the ID of the game state 
+	 */
 	public int getID() {
 		return ID;
 	}
 	
-	/************************************************
-	 * Method to get what animation should be drawn *
-	 * @author Jesse                                *
-	 ************************************************/
+	/**
+	 * Method to get what animation should be drawn
+	 * 
+	 * @param fighter Fighter to get the current animation of
+	 * @return Animation the fighter is performing
+	 */
 	public Animation whichAnimation(Fighter fighter) {
 		
 		switch (fighter.getCurrentAction()) {
@@ -291,9 +295,12 @@ public class ActualPlay extends BasicGameState{
 		return animationToReturn;
 	}
 	
-	/************************************************
-	 * Method to get what animation should be reset *
-	 * @author Jesse                                *
+	
+	/**
+	 * Method to get what animation should be reset 
+	 * 
+	 * @param fighter Fighter to get the last animation of
+	 * @return Animation the fighter last performed
 	 ************************************************/
 	public Animation lastAnimation(Fighter fighter) {
 		
@@ -310,11 +317,12 @@ public class ActualPlay extends BasicGameState{
 		return animationToReturn;
 	}
 	
-	/*****************************************
-	 * Method to make things fall            *
-	 * @author Jesse                         *
-	 * @param fighter fighter that will fall *
-	 *****************************************/
+	
+	/**
+	 * Method to make things fall
+	 * 
+	 * @param fighter fighter to succumb to gravity 
+	 */
 	public void fall(Fighter fighter) {
 		
 		// Update the velocity of the fighter
@@ -331,16 +339,14 @@ public class ActualPlay extends BasicGameState{
 	}
 	
 	
-	/***********************************************
-	 * Position Update - Left/Right Movement Logic *
-	 * @author Jesse                               *
-	 ***********************************************/
+	/**
+	 * Position Update - X-Axis (left/right movement) logic                                
+	 */
 	public void updateXPositions() {
 		
-		// Note from Jesse - if you guys want, I'll comment this code, but if you ask me, I'll explain it (maybe)
+		// Note from Jesse - if you guys want, I'll comment this code, but if you ask me, I'll explain it
 		
 		// Basic Movement - Happens when players are moving left/right without going near the border
-		
 		if (player1.getPosition().getX() > 10 && player1.getIntent("left") && player1.isLeftMovementRestricted() == false) {
 			player1.moveLeft(fms);
 			player1.setCurrentAction("moving left");
@@ -358,7 +364,6 @@ public class ActualPlay extends BasicGameState{
 		}
 				
 		// Map-Moving Movement of Player 1 - Happens when player 1 moves left/right, going near the edge
-				
 		if (player1.getPosition().getX() <= 10 && player1.getIntent("left") && foregroundPosition < 0 && player2.getPosition().getX() < 840 && player1.isLeftMovementRestricted() == false) {
 			foregroundPosition += fgms;
 			backgroundPosition += bgms;
@@ -375,7 +380,6 @@ public class ActualPlay extends BasicGameState{
 		}
 				
 		// Map-Moving Movement of Player 2 - Happens when player 2 moves left/right, going near the edge
-				
 		if (player2.getPosition().getX() <= 10 && player2.getIntent("left") && foregroundPosition < 0 && player1.getPosition().getX() < 840 && player1.isLeftMovementRestricted() == false) {
 			foregroundPosition += fgms;
 			backgroundPosition += bgms;
@@ -392,9 +396,13 @@ public class ActualPlay extends BasicGameState{
 		}
 	}
 	
-	/***************************************************
-	 * Basically an actionListener for all key presses *
-	 ***************************************************/
+	
+	/**
+	 * actionListener for all key presses (part of game loop - doesn't need to be executed)
+	 * 
+	 * @param key value of key pressed
+	 * @param c value of key pressed 
+	 */
 	public void keyPressed(int key, char c) {
 		
 		if (key == 17) { // If the key pressed is the 'W' key
@@ -433,8 +441,35 @@ public class ActualPlay extends BasicGameState{
 		System.out.println("Char: " + c);
 	}
 	
+	
 	/**
-	 * Basically an actionListener for all mouse presses
+	 * actionListener for all key releases (part of game loop - doesn't need to be executed)
+	 * 
+	 * @param key value of key released
+	 * @param c value of key released
+	 */
+	public void keyReleased(int key, char c) {
+		
+		if (key == 30) { // If the key released is the 'A' key
+			player1.setIntent("left", false);
+		}
+		
+		if (key == 32) { // If the key released is the 'D' key
+			player1.setIntent("right", false);
+		}
+		
+		if (key == 203) { // If the key released is the left arrow key
+			player2.setIntent("left", false);
+		}
+		
+		if (key == 205) { // If the key released is the right arrow key
+			player2.setIntent("right", false);
+		}
+	}
+	
+	
+	/**
+	 * actionListener for all mouse presses
 	 * 
 	 * @param x x coordinate of press
 	 * @param y y coordinate of press
@@ -465,42 +500,21 @@ public class ActualPlay extends BasicGameState{
 		gamePaused = false;
 	}
 	
-	/****************************************************
-	 * Basically an actionListener for all key releases *
-	 ****************************************************/
-	public void keyReleased(int key, char c) {
-		
-		if (key == 30) { // If the key released is the 'A' key
-			player1.setIntent("left", false);
-		}
-		
-		if (key == 32) { // If the key released is the 'D' key
-			player1.setIntent("right", false);
-		}
-		
-		if (key == 203) { // If the key released is the left arrow key
-			player2.setIntent("left", false);
-		}
-		
-		if (key == 205) { // If the key released is the right arrow key
-			player2.setIntent("right", false);
-		}
-	}
 	
-	/********************************************
-	 * Used to set the color scheme of the game *
-	 *                                          *
-	 * @param c1 first (filler) color           *
-	 * @param c2 second (outline) color         *
-	 ********************************************/
+	/**
+	 * Set the color scheme of the game 
+	 *                                          
+	 * @param c1 first (filler) color           
+	 * @param c2 second (outline) color         
+	 */
 	public static void setColors(Color c1, Color c2) {
 		color1 = c1;
 		color2 = c2;
 	}
 	
-	/*****************
-	 * Draws the HUD *
-	 *****************/
+	/**
+	 * Draw the HUD 
+	 */
 	public void drawHUD(Graphics g) {
 		g.setLineWidth(3);
 		
