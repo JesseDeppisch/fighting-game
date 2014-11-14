@@ -1,3 +1,5 @@
+package game;
+
 import java.awt.Font;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;

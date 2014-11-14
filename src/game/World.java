@@ -1,3 +1,4 @@
+package game;
 import org.newdawn.slick.Image;
 
 public class World {
