@@ -1,3 +1,4 @@
+package game;
 import java.awt.Menu;
 
 import org.newdawn.slick.AppGameContainer;
