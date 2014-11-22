@@ -26,7 +26,7 @@ public class SplashScreen extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
-		splashScreen = new Image("res/splashscreen.png"); // placeholder until we name the game
+		splashScreen = new Image("/res/splashscreen.png"); // placeholder until we name the game
 	}
 	
 	@Override

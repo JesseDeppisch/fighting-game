@@ -25,7 +25,7 @@ public class ActualPlay extends BasicGameState{
 	 * A test of the game that includes 2 players on the map, and unlike
 	 * the Play class, is built using objects.
 	 * 
-	 * @author JesseDeppisch
+	 * @author JesseDeppisch 
 	 */
 	
 	// BasicGameState declarations
@@ -87,7 +87,7 @@ public class ActualPlay extends BasicGameState{
 		
 		
 		// TODO - add more spritesheets here
-		SpriteSheet sheet = new SpriteSheet("res/idle.png", 150, 250);
+		SpriteSheet sheet = new SpriteSheet("/res/idle.png", 150, 250);
 		
 		idleAnimation = new Animation(false);
 		for (int y = 0; y < 2; y ++) {
@@ -100,11 +100,11 @@ public class ActualPlay extends BasicGameState{
 		//idleAnimation.addFrame(sheet.getSprite(2,2), 150);
 		
 		// Creating the world
-		world = new World(new Image("res/Clouds.png"), new Image("res/Game Background.png"));
+		world = new World(new Image("/res/clouds.png"), new Image("/res/Game Background.png"));
 		
 		// Creating the fighters
-		player1 = new Fighter(new Image("res/stickFigure.png"), 100, 250);
-		player2 = new Fighter(new Image("res/stickFigure.png"), 750, 250);
+		player1 = new Fighter(new Image("/res/stickfigure.png"), 100, 250);
+		player2 = new Fighter(new Image("/res/stickfigure.png"), 750, 250);
 		
 		// Movement speed
 		fms = 5; // subject to change
@@ -112,8 +112,8 @@ public class ActualPlay extends BasicGameState{
 		bgms = fms * .2f;
 		
 		// ONLY IN TESTING (loading player identifiers)
-		p1 = new Image("res/1P.png");
-		p2 = new Image("res/2P.png");
+		p1 = new Image("/res/1P.png");
+		p2 = new Image("/res/2P.png");
 		
 		// Setting the starting positions of the map (DO NOT CHANGE!!)
 		foregroundPosition = -500;
@@ -226,6 +226,7 @@ public class ActualPlay extends BasicGameState{
 		player1.updateAABB();
 		player2.updateAABB();
 		
+		/*
 		// updating logic for movement
 		if (AABB.collides(player1.getCollisionBox(), player2.getCollisionBox())) { // If the collision boxes of the fighters are colliding
 			if (player1.getPosition().getX() < player2.getPosition().getX()) {     // If player1 is to the left of player2
@@ -241,6 +242,7 @@ public class ActualPlay extends BasicGameState{
 			player2.setLeftMovementRestricted(false);
 			player2.setRightMovementRestricted(false);
 		}
+		*/
 		
 		// TODO finish implementation of animation logic
 		

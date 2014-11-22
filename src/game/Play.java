@@ -40,9 +40,9 @@ public class Play extends BasicGameState{
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		this.game = game;
 		
-		background = new Image("res/Clouds.png");
-		foreground = new Image("res/Game Background.png");
-		stickFigure = new Image("res/stickfigure.png");
+		background = new Image(getClass().getResource("/res/Clouds.png").toExternalForm());
+		foreground = new Image(getClass().getResource("/res/Game Background.png").toExternalForm());
+		stickFigure = new Image(getClass().getResource("/res/stickfigure.png").toExternalForm());
 		
 		foregroundPosition = -500;
 		backgroundPosition = -500;
